@@ -1,0 +1,128 @@
+<!-- 
+Online HTML, CSS and JavaScript editor to run code online.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Browser</title>
+</head>
+
+<body>
+  <h1>
+    Write, edit and run HTML, CSS and JavaScript code online.
+  </h1>
+  <p>
+    Our HTML editor updates the webview automatically in real-time as you write code.
+  </p>
+  <script src="script.js"></script>
+</body>
+
+</html>html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Números</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-image: linear-gradient(to bottom right, #0099ff, #99ccff);
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            margin: 10px;
+            background-color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .selected {
+            background-color: #4caf50;
+            border: 2px solid #4caf50;
+            color: #fff;
+        }
+
+        .footer {
+            margin-top: auto;
+            margin-bottom: 20px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Seleção de Números</h1>
+    <div class="container">
+        <!-- Círculos numerados de 1 a 100 -->
+    </div>
+
+    <div class="footer">
+        <p>Desenvolvido por Nadson Brito</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+
+            for (let i = 1; i <= 100; i++) {
+                const circle = document.createElement('div');
+                circle.classList.add('circle');
+                circle.textContent = i;
+                
+                circle.addEventListener('click', function() {
+                    circle.classList.toggle('selected');
+
+                    // Salvar o estado no localStorage
+                    const selectedNumbers = Array.from(document.querySelectorAll('.circle.selected')).map(circle => circle.textContent);
+                    localStorage.setItem('selectedNumbers', JSON.stringify(selectedNumbers));
+                });
+
+                container.appendChild(circle);
+            }
+
+            // Restaurar o estado dos números marcados ao carregar a página
+            const selectedNumbers = JSON.parse(localStorage.getItem('selectedNumbers')) || [];
+            selectedNumbers.forEach(number => {
+                const circle = Array.from(document.querySelectorAll('.circle')).find(circle => circle.textContent === number);
+                if (circle) {
+                    circle.classList.add('selected');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
